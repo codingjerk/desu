@@ -7,6 +7,7 @@ import subprocess
 import glob
 import importlib
 import argparse
+import time
 
 
 def get_plugin_filenames(plugins_dirs):
@@ -33,12 +34,12 @@ def load_plugin(plugin_filename):
     module = importlib.import_module(module_name)
     sys.path.pop()
 
-    return module  
+    return module
 
 
 def load_plugins(plugins_dir):
     plugin_names = get_plugin_filenames(plugins_dir)
-    return (load_plugin(p) for p in plugin_names) 
+    return (load_plugin(p) for p in plugin_names)
 
 
 def modify_args(args, plugins, verbose=False):
@@ -52,7 +53,7 @@ def modify_args(args, plugins, verbose=False):
             result = plugin.modify(result)
 
     return result
- 
+
 
 def get_plugins_dir():
     script_dir = os.path.dirname(os.path.realpath(__file__))
@@ -97,10 +98,7 @@ def make_settings(args):
 
     return parser, settings
 
-    
-# TODO: readme
-# TODO: default plugins repository
-# TODO: installation script
+
 def main(args):
     desu_args, cmd_args = split_args(args)
     parser, settings = make_settings(desu_args)
@@ -119,7 +117,7 @@ def main(args):
     return run_command(newargs)
 
 
+# TODO: add autocolor plugin
 if __name__ == '__main__':
     exit_code = main(sys.argv[1:])
     exit(exit_code)
-
