@@ -61,7 +61,9 @@ desu mount /dev/sdb3 /mnt/data/external
 ```
 
 Also you can use following arguments:
-* `-v`, `--verbose` -- e
+* `-v`, `--verbose` - enables verbose output
+* `-p<PLUGINS_DIR>`, `--plugins-dir<PLUGINSDIR>` - sets aditionaly plugins dir (can be used to add own plugins for each user)
+* `-n`, `--no-global-plugins` - disables globally installed plugins
 
 ### Applying desu for all commands (without typing desu)
 
@@ -69,13 +71,21 @@ You may want to use desu automatically without typing desu, just typing commands
 
 #### Zsh
 
-## Desu and thef\*\*k
+This solution isn't ideal, so make it only if you know that are you doing.
 
-If you interesting in desu you maybe already know about thef\*\*k (link).
+Append this lines to .zshrc:
+```
+add-desu() { [[ $BUFFER = desu* ]] || [[ $BUFFER = for* ]] || [[ $BUFFER = while* ]] || [[ $BUFFER = cd* ]] || [[ $BUFFER = *\=* ]] || BUFFER="desu $BUFFER"; zle .$WIDGET "$@"; }
+zle -N accept-line add-desu
+```
 
-Desu's and thef\*\*k's goals are similar - help user to working in terminal without pain, but desu is preventive solution, that **helping with keys**. On the other hand thef\*\*k is late-decision solution that **helping with errors**.
+## Desu and The Fuck
 
-So you just can use both on desu and thef\*\*k.
+If you interesting in desu you maybe already know about [The Fuck](https://github.com/nvbn/thefuck).
+
+Desu's and fuck's goals are similar - help user to working in terminal without pain, but desu is preventive solution, that **helping with keys**. On the other hand fuck is late-decision solution that **helping with errors**.
+
+So you just can use both on desu and fuck.
 
 Also you can use desu as late-decision solution with `!!`:
 ```bash
@@ -85,27 +95,31 @@ $ desu !!
 # Ok
 ```
 
-And as you know, you can use desu in transparent mode (desu will automatically modify every command you type). Thef\*\*k can't work in that mode.
+And as you know, you can use desu in transparent mode (desu will automatically modify every command you type). Fuck can't work in that mode.
 
 ## Installation
 
+1. `$ git clone ...`
+1. `$ cd desu`
+1. `$ ./install desu` **as root**
+1. `$ ./install extra-plugins` (if you want)
+1. `$ ./install zsh-transparency` **only if you need it**, see [transparent mode](https://github.com/d3adc0d3/desu#applying-desu-for-all-commands-without-typing-desu) for details
+
 ### Dependencies
 * Python 3x
-* pexpect
-* Git (for installation)
-
-## Examples (with default plugins)
+* Git (to install default plugins)
 
 ## Plugins
 
-### Default plugins repository
-Default plugins repository (link) contains usefull plugins for common commands.
+Desu based on plugin-driven model, so desu's core is tuny and easy to undestand, and all matching/modifying functionality is in plugins.
 
-### Extra plugins repository
-Extra plugins repository contains usefull plugins, but for non-common commands.
+So desu functionality depends on plugins you install.
 
-At the moment, still is working on the extra repository. Once it is ready, there will be placed a link to it.
+### Desu plugins repositories
+* [Default plugins repository](https://github.com/d3adc0d3/desu-default-plugins) - contains usefull plugins for common commands. Automatically installed with default installation script
+* [Extra plugins repository]() - contains usefull plugins, but for non-common commands
+
+At the moment, I still working on the extra repository. Once it is ready, there will be placed a link to it.
 
 ### Writing your own plugins
-
-#### Example plugins repository
+TODO :D
