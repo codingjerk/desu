@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+
+# TODO: add prefix
+
+if [[ $1 = desu ]]; then
+    echo Installing desu
+    mkdir -p /usr/lib/desu/
+    cp desu.py /usr/lib/desu/desu.py
+    ln -s /usr/lib/desu/desu.py /usr/bin/desu
+
+    echo Installing default plugins
+    git clone https://github.com/d3adc0d3/desu-default-plugins.git /usr/lib/desu/plugins
+
+    echo Ok
+elif [[ $1 = extra-plugins ]]; then
+    echo Installing extra-plugins
+    echo Sorry, but its TODO :D
+elif [[ $1 = zsh-transparency ]]; then
+    echo Adding zsh transparency
+    echo Sorry, but its TODO :D
+else
+    echo Error: unknown install command
+fi
