@@ -1,14 +1,16 @@
 #!/usr/bin/env sh
 
 # TODO: add prefix
+# TODO: maybe switch to makefile?
 
 if [[ $1 = desu ]]; then
     echo Installing desu
     mkdir -p /usr/lib/desu/
     cp desu.py /usr/lib/desu/desu.py
-    ln -s /usr/lib/desu/desu.py /usr/bin/desu
+    (ls /usr/bin/desu > /dev/null) || ln -s /usr/lib/desu/desu.py /usr/bin/desu
 
     echo Installing default plugins
+    (ls /usr/lib/desu/plugins > /dev/null) && (cd /usr/lib/desu/plugins; git pull) || \
     git clone https://github.com/d3adc0d3/desu-default-plugins.git /usr/lib/desu/plugins
 
     echo Ok
