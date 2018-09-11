@@ -114,10 +114,17 @@ def main(args):
         cmd_str = ' '.join(newargs)
         print('\ndesu: running as %s\n' % cmd_str, file=sys.stderr)
 
-    return run_command(newargs)
+    try:
+        return run_command(newargs)
+    except FileNotFoundError as e:
+        print(e.strerror, file=sys.stderr)
+        return 1
 
 
 # TODO: add autocolor plugin
+# TODO: zsh autocomplete (broken)
+# TODO: keyboard interrupt (broken)
 if __name__ == '__main__':
     exit_code = main(sys.argv[1:])
     exit(exit_code)
+
