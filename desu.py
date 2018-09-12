@@ -63,8 +63,15 @@ def get_plugins_dir():
 
 
 def run_command(args):
-    cmd_result = subprocess.run(args)
-    return cmd_result.returncode
+    process = subprocess.Popen(args)
+    while True:
+        try:
+            if process.poll() is not None: break
+            process.wait(5)
+        except (subprocess.TimeoutExpired, KeyboardInterrupt):
+            pass # Nothing to do there
+
+    return process.returncode
 
 
 def split_args(args):
@@ -123,7 +130,7 @@ def main(args):
 
 # TODO: add autocolor plugin
 # TODO: zsh autocomplete (broken)
-# TODO: keyboard interrupt (broken)
+# TODO: empty line zsh transparency
 if __name__ == '__main__':
     exit_code = main(sys.argv[1:])
     exit(exit_code)
