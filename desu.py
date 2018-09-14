@@ -46,7 +46,6 @@ def modify_args(args, plugins, verbose=False):
     result = args[:]
     for plugin in plugins:
         if plugin.match(result):
-            # TODO: use logger instead of checking settings
             if verbose:
                 print('desu: applying %s' % plugin.name, file=sys.stderr)
 
@@ -128,9 +127,6 @@ def main(args):
         return 1
 
 
-# TODO: add autocolor plugin
-# TODO: zsh autocomplete (broken)
-# TODO: empty line zsh transparency
 if __name__ == '__main__':
     exit_code = main(sys.argv[1:])
     exit(exit_code)

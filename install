@@ -6,7 +6,8 @@
 if [[ $1 = desu ]]; then
     echo Installing desu
     mkdir -p /usr/lib/desu/
-    cp desu.py /usr/lib/desu/desu.py
+    cp ./desu.py /usr/lib/desu
+    cp -R ./shells /usr/lib/desu
     (ls /usr/bin/desu > /dev/null) || ln -s /usr/lib/desu/desu.py /usr/bin/desu
 
     echo Installing default plugins
@@ -19,7 +20,7 @@ elif [[ $1 = extra-plugins ]]; then
     echo Sorry, but its TODO :D
 elif [[ $1 = zsh-transparency ]]; then
     echo Adding zsh transparency
-    echo Sorry, but its TODO :D
+    (grep '. /usr/lib/desu/shells/zsh' ~/.zshrc) || echo '. /usr/lib/desu/shells/zsh' >> ~/.zshrc
 else
     echo Error: unknown install command
 fi

@@ -1,0 +1,6 @@
+# TODO: add desu-command-match.py (or something similar) instead of ugly bash checks
+# TODO: i really need python there
+compdef _precommand desu
+
+add-desu() { [[ $BUFFER = ". "* ]] || [[ $BUFFER = "compdef "* ]] || [[ -z ${BUFFER// } ]] || [[ $BUFFER = "desu "* ]] || [[ $BUFFER = "for "* ]] || [[ $BUFFER = "while "* ]] || [[ $BUFFER = "cd "* ]] || [[ $BUFFER = *\=* ]] || BUFFER="desu $BUFFER"; zle .$WIDGET "$@"; }
+zle -N accept-line add-desu
