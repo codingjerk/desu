@@ -20,7 +20,7 @@ elif [[ $1 = extra-plugins ]]; then
     echo Sorry, but its TODO :D
 elif [[ $1 = zsh-transparency ]]; then
     echo Adding zsh transparency
-    (grep '. /usr/lib/desu/shells/zsh' ~/.zshrc) || echo '. /usr/lib/desu/shells/zsh' >> ~/.zshrc
+    (grep '. /usr/lib/desu/shells/zsh' ~/.zshrc > /dev/null) || (echo '. /usr/lib/desu/shells/zsh' >> ~/.zshrc)
 else
     echo Error: unknown install command
 fi
