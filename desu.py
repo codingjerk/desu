@@ -122,7 +122,7 @@ def main(args):
 
     try:
         return run_command(newargs)
-    except FileNotFoundError as e:
+    except (FileNotFoundError, PermissionError) as e:
         print(e.strerror, file=sys.stderr)
         return 1
 
